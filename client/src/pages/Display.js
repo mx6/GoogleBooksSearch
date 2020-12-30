@@ -71,7 +71,7 @@ function Books() {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h3>Search For a Book</h3>
             </Jumbotron>
             <form>
               <Input
@@ -82,13 +82,13 @@ function Books() {
               <Input
                 onChange={handleInputChange}
                 name="author"
-                placeholder="Author (required)"
+                placeholder="Author (Optional)"
               />
-              <TextArea
+              {/* <TextArea
                 onChange={handleInputChange}
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
-              />
+              /> */}
               <FormBtn
                 disabled={!(formObject.author && formObject.title)}
                 onClick={handleFormSubmit}

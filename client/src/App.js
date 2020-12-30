@@ -4,6 +4,7 @@ import Display from "./pages/Display";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
+import Books from "./pages/Books"
 
 function App() {
   return (
@@ -11,15 +12,21 @@ function App() {
       <div>
         <Nav />
         <Switch>
+
           <Route exact path={["/", "/display"]}>
             <Display />
           </Route>
-          <Route exact path="/books/:id">
-            <Detail />
+
+          <Route exact path="/display"></Route>
+
+          <Route exact path="/books">
+            <Books />
           </Route>
+
           <Route>
             <NoMatch />
           </Route>
+
         </Switch>
       </div>
     </Router>

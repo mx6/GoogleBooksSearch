@@ -1,0 +1,14 @@
+.navbar {
+  background-color: #cc9900 !important;
+}
+
+a {
+  color: black;
+  padding: 5px;
+}
+
+a:hover {
+  color: orange;
+  text-decoration: none;
+  
+}

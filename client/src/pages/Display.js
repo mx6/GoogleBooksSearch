@@ -69,7 +69,7 @@ function Books() {
       
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
               <h1>What Books Should I Read?</h1>
             </Jumbotron>
@@ -97,7 +97,7 @@ function Books() {
               </FormBtn>
             </form>
           </Col>
-          <Col size="md-6 sm-12">
+          {/* <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron>
@@ -117,7 +117,7 @@ function Books() {
             ) : (
               <h3>No Results to Display</h3>
             )}
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     );

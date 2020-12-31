@@ -69,7 +69,7 @@ function Books() {
       
       <Container fluid>
         <Row>
-          {/* <Col size="md-12">
+          <Col size="md-12">
             <Jumbotron>
               <h3>Search For a Book</h3>
             </Jumbotron>
@@ -83,23 +83,23 @@ function Books() {
                 onChange={handleInputChange}
                 name="author"
                 placeholder="Author (Optional)"
-              /> */}
+              />
               {/* <TextArea
                 onChange={handleInputChange}
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
               /> */}
-              {/* <FormBtn
+              <FormBtn
                 disabled={!(formObject.title)}
                 onClick={handleFormSubmit}
               >
                 Submit Book
               </FormBtn>
             </form>
-          </Col> */}
-          <Col size="md-12 sm-12">
+          </Col>
+          {/* <Col size="md-6 sm-12">
             <Jumbotron>
-              <h3>Books On My List</h3>
+              <h1>Books On My List</h1>
             </Jumbotron>
             {searchResults.length ? (
               <List>
@@ -117,7 +117,7 @@ function Books() {
             ) : (
               <h3>No Results to Display</h3>
             )}
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     );

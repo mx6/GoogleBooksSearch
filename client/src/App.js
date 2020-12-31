@@ -4,7 +4,7 @@ import Display from "./pages/Display";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-import Books from "./pages/Books"
+import Search from "./pages/Search"
 
 function App() {
   return (
@@ -13,15 +13,16 @@ function App() {
         <Nav />
         <Switch>
 
-          <Route exact path={["/", "/display"]}>
-            <Display />
+          <Route exact path={["/", "/search"]}>
+            <Search />
           </Route>
 
           <Route exact path="/display"></Route>
+            <Display />
 
-          <Route exact path="/books">
+          {/* <Route exact path="/books">
             <Books />
-          </Route>
+          </Route> */}
 
           <Route>
             <NoMatch />

@@ -7,12 +7,14 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import axios from "axios";
+import { Card, Button } from "react-bootstrap"
 
 function Books() {
   // Setting our component's initial state
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("cujo")
+  const [searchbyAuthor, setSearchByAuthor] = useState("")
   const [searchResults, setSearchResults] = useState([])
   // Load all books and store them with setBooks
   useEffect(() => {
@@ -20,16 +22,21 @@ function Books() {
   }, [])
 
   useEffect( () => {
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + search)
-    .then(resp => setSearchResults(resp.data.items))
+    // console.log("https://www.googleapis.com/books/v1/volumes?q=" + search)
+      axios.get("https://www.googleapis.com/books/v1/volumes?q=" + search)
+    .then(resp => {
+      setBooks(resp.data.items)
+      }
+    )
     
   }, [])
 
   // Loads all books and sets them to books
   function loadBooks() {
     API.getBooks()
-      .then(res => 
-        setBooks(res.data)
+      .then(res => {
+        console.log(res)
+        setBooks(res.data.data.items)}
         // console.log(res)
       )
       .catch(err => console.log(err));
@@ -45,23 +52,46 @@ function Books() {
   // Handles updating component state when the user types into the input field
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value})
+    // setFormObject({...formObject, [name]: value})
+    console.log(event.target.value)
+    setSearch(event.target.value)
+    
+  };
+
+  function searchByAuthor(event) {
+    const { name, value } = event.target;
+    // setFormObject({...formObject, [name]: value})
+    setSearchByAuthor(value)
   };
 
   // When the form is submitted, use the API.saveBook method to save the book data
   // Then reload books from the database
-  function handleFormSubmit(event) {
+  function addToDatabase(event, item) {
     event.preventDefault();
-    if (formObject.title) {
+    console.log(item.volumeInfo)
+    // if (formObject.title) {
       API.saveBook({
-        title: formObject.title,
-        author: formObject.author,
-        synopsis: formObject.synopsis
+        title: item.volumeInfo.title,
+        author: item.volumeInfo.author,
+        synopsis: item.volumeInfo.description
       })
         .then(res => loadBooks())
         .catch(err => console.log(err));
-    }
+    // }
   };
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    // console.log(books)
+    // if (formObject.title) {
+        axios.get("https://www.googleapis.com/books/v1/volumes?q=" + search)
+        .then(res => {setBooks([...res.data.items]) 
+          console.log(res)})
+        
+        .catch(err => console.log(err));
+    // }
+  };
+
   // console.log(typeof books)
   console.log(searchResults)
   console.log(search)
@@ -75,12 +105,14 @@ function Books() {
             </Jumbotron>
             <form>
               <Input
+                value={search}
                 onChange={handleInputChange}
                 name="title"
                 placeholder="Title (required)"
               />
               <Input
-                onChange={handleInputChange}
+                value={searchbyAuthor}
+                onChange={searchByAuthor}
                 name="author"
                 placeholder="Author (Optional)"
               />
@@ -90,7 +122,7 @@ function Books() {
                 placeholder="Synopsis (Optional)"
               /> */}
               <FormBtn
-                disabled={!(formObject.title)}
+                // disabled={!(formObject.title)}
                 onClick={handleFormSubmit}
               >
                 Submit Book
@@ -119,6 +151,22 @@ function Books() {
             )}
           </Col> */}
         </Row>
+        <div id="displayBookHere">
+          {
+            books.map(book => (
+              <Card>
+                <Card.Header as="h5" className="bg-light d-flex justify-content-between">
+                 <Card.Title>{book.volumeInfo.title}
+                 
+                 </Card.Title>
+                 <Button onClick={ (event) => addToDatabase(event, book)}>Save</Button>
+                </Card.Header>
+                <Card.Body>{book.volumeInfo.description}</Card.Body>
+              </Card>
+            )
+            )
+          }
+        </div>
       </Container>
     );
   }

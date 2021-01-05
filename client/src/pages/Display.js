@@ -29,8 +29,8 @@ function Books() {
   function loadBooks() {
     API.getBooks()
       .then(res => 
-        setBooks(res.data)
-        // console.log(res)
+        {setBooks(res.data)
+        console.log(res)}
       )
       .catch(err => console.log(err));
   };
@@ -64,50 +64,23 @@ function Books() {
   };
   // console.log(typeof books)
   console.log(searchResults)
-  console.log(search)
+  console.log(books)
     return (
       
       <Container fluid>
         <Row>
-          {/* <Col size="md-12">
-            <Jumbotron>
-              <h3>Search For a Book</h3>
-            </Jumbotron>
-            <form>
-              <Input
-                onChange={handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                onChange={handleInputChange}
-                name="author"
-                placeholder="Author (Optional)"
-              /> */}
-              {/* <TextArea
-                onChange={handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              /> */}
-              {/* <FormBtn
-                disabled={!(formObject.title)}
-                onClick={handleFormSubmit}
-              >
-                Submit Book
-              </FormBtn>
-            </form>
-          </Col> */}
           <Col size="md-12 sm-12">
             <Jumbotron>
               <h3>Books On My List</h3>
             </Jumbotron>
-            {searchResults.length ? (
+            {books.length ? (
               <List>
-                {searchResults.map (book => (
+                {books.map (book => (
+                  
                   <ListItem key={book._id}>
                     <Link to={"/books/" + book._id}>
                       <strong>
-                        {book.title} by {book.author}
+                        {book.title} by {book.authors}
                       </strong>
                     </Link>
                     <DeleteBtn onClick={() => deleteBook(book._id)} />

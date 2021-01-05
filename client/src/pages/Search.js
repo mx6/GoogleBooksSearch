@@ -7,7 +7,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import axios from "axios";
-import { Card, Button } from "react-bootstrap"
+import { Card, Button, Image } from "react-bootstrap"
 
 function Books() {
   // Setting our component's initial state
@@ -72,7 +72,7 @@ function Books() {
     // if (formObject.title) {
       API.saveBook({
         title: item.volumeInfo.title,
-        author: item.volumeInfo.author,
+        author: item.volumeInfo.authors,
         synopsis: item.volumeInfo.description
       })
         .then(res => loadBooks())
@@ -129,27 +129,7 @@ function Books() {
               </FormBtn>
             </form>
           </Col>
-          {/* <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
-            {searchResults.length ? (
-              <List>
-                {searchResults.map (book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => deleteBook(book._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col> */}
+
         </Row>
         <div id="displayBookHere">
           {
@@ -161,7 +141,9 @@ function Books() {
                  </Card.Title>
                  <Button onClick={ (event) => addToDatabase(event, book)}>Save</Button>
                 </Card.Header>
-                <Card.Body>{book.volumeInfo.description}</Card.Body>
+                <Card.Body>{book.volumeInfo.authors}</Card.Body>
+                <Image src={book.volumeInfo.imageLinks.thumbnail} className="float-left img-thumbnail mr-2" />
+                <Card.Text>{book.volumeInfo.description}</Card.Text>
               </Card>
             )
             )

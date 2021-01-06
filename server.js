@@ -18,10 +18,12 @@ app.use(routes);
 // Connect to the Mongo DB
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 
-mongoose.connect("mongodb://localhost/reactreadinglist", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 const db = mongoose.connection; //create db variable
 db.on("error", console.error.bind(console, "Connection error:")); //if any error occurs

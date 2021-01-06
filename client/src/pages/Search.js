@@ -13,7 +13,7 @@ function Books() {
   // Setting our component's initial state
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
-  const [search, setSearch] = useState("cujo")
+  const [search, setSearch] = useState("")
   const [searchbyAuthor, setSearchByAuthor] = useState("")
   const [searchResults, setSearchResults] = useState([])
   // Load all books and store them with setBooks
@@ -72,8 +72,9 @@ function Books() {
     // if (formObject.title) {
       API.saveBook({
         title: item.volumeInfo.title,
-        author: item.volumeInfo.authors,
-        synopsis: item.volumeInfo.description
+        author: item.volumeInfo.authors.join(),
+        synopsis: item.volumeInfo.description,
+        link: item.volumeInfo.infoLink
       })
         .then(res => loadBooks())
         .catch(err => console.log(err));
@@ -144,6 +145,7 @@ function Books() {
                 <Card.Body>{book.volumeInfo.authors}</Card.Body>
                 <Image src={book.volumeInfo.imageLinks.thumbnail} className="float-left img-thumbnail mr-2" />
                 <Card.Text>{book.volumeInfo.description}</Card.Text>
+                <a href={book.volumeInfo.infoLink}>Google Books Link</a>
               </Card>
             )
             )

@@ -7,6 +7,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import axios from "axios";
+import { Card, Button, Image } from "react-bootstrap"
 
 function Books() {
   // Setting our component's initial state
@@ -76,13 +77,15 @@ function Books() {
             {books.length ? (
               <List>
                 {books.map (book => (
-                  
+              
                   <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
+                    {/* <Link to={"/books/" + book._id}> */}
                       <strong>
-                        {book.title} by {book.authors}
+                        {book.title} by {book.author}
+                        {/* <p>{book.synopsis}</p> */}
+                        <br /> <br /> <p> <a href={book.link}>Google Books Link</a></p>
                       </strong>
-                    </Link>
+                    {/* </Link> */}
                     <DeleteBtn onClick={() => deleteBook(book._id)} />
                   </ListItem>
                 ))}

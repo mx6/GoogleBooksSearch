@@ -82,8 +82,9 @@ function Books() {
                     {/* <Link to={"/books/" + book._id}> */}
                       <strong>
                         {book.title} by {book.author}
-                        {/* <p>{book.synopsis}</p> */}
-                        <br /> <br /> <p> <a href={book.link}>Google Books Link</a></p>
+                        <p><img src={book.thumbnail} className="float-left img-thumbnail mr-2" /></p>
+                        <p>{book.synopsis}</p>
+                        <br /> <br /> <p> <a href={book.link}>View Book at Google Books</a></p>
                       </strong>
                     {/* </Link> */}
                     <DeleteBtn onClick={() => deleteBook(book._id)} />

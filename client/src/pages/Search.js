@@ -74,7 +74,8 @@ function Books() {
         title: item.volumeInfo.title,
         author: item.volumeInfo.authors.join(),
         synopsis: item.volumeInfo.description,
-        link: item.volumeInfo.infoLink
+        link: item.volumeInfo.infoLink,
+        thumbnail: item.volumeInfo.imageLinks.thumbnail
       })
         .then(res => loadBooks())
         .catch(err => console.log(err));
@@ -145,7 +146,7 @@ function Books() {
                 <Card.Body>{book.volumeInfo.authors}</Card.Body>
                 <Image src={book.volumeInfo.imageLinks.thumbnail} className="float-left img-thumbnail mr-2" />
                 <Card.Text>{book.volumeInfo.description}</Card.Text>
-                <a href={book.volumeInfo.infoLink}>Google Books Link</a>
+                <a href={book.volumeInfo.infoLink}>View Book at Google Books</a>
               </Card>
             )
             )
